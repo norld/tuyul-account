@@ -1,0 +1,11 @@
+{
+  "name": "tuyul-account",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^10.1.0",
+    "pm2": "^5.2.2",
+    "web3-eth-accounts": "^1.8.0"
+  }
+}
