@@ -16,16 +16,16 @@ const validate = async (address, privateKey) => {
         throw e;
       });
     const position = html.search("did not match any address");
-    // if (position === "-1") {
-    console.log("bingo", position);
-    let kumpul = [];
-    const list = fs.readFileSync("./bingo.json", { encoding: "utf-8" });
-    if (list !== "") kumpul = JSON.parse(list);
+    if (position === "-1") {
+      console.log("bingo", position);
+      let kumpul = [];
+      const list = fs.readFileSync("./bingo.json", { encoding: "utf-8" });
+      if (list !== "") kumpul = JSON.parse(list);
 
-    kumpul.push({ address, privateKey });
-    console.log("bingo length", kumpul.length);
-    fs.writeFileSync("./bingo.json", JSON.stringify(kumpul, null, 2));
-    // }
+      kumpul.push({ address, privateKey });
+      console.log("bingo length", kumpul.length);
+      fs.writeFileSync("./bingo.json", JSON.stringify(kumpul, null, 2));
+    }
     return 1;
   } catch (e) {
     console.log(e);
