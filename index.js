@@ -5,7 +5,6 @@ const end = 50;
 let now = 0;
 const validate = async (address, privateKey) => {
   try {
-    let lol = "";
     const html = await fetch(`https://blockscan.com/address/${address}`)
       .then((response) => {
         return response.text();
@@ -14,21 +13,19 @@ const validate = async (address, privateKey) => {
         return html;
       })
       .catch((e) => {
-        lol = e;
-        return 1;
+        throw e;
       });
-    if (!lol) return 1;
     const position = html.search("did not match any address");
-    if (position === "-1") {
-      console.log("bingo", position);
-      let kumpul = [];
-      const list = fs.readFileSync("./bingo.json", { encoding: "utf-8" });
-      if (list !== "") kumpul = JSON.parse(list);
+    // if (position === "-1") {
+    console.log("bingo", position);
+    let kumpul = [];
+    const list = fs.readFileSync("./bingo.json", { encoding: "utf-8" });
+    if (list !== "") kumpul = JSON.parse(list);
 
-      kumpul.push({ address, privateKey });
-      console.log("bingo length", kumpul.length);
-      fs.writeFileSync("./bingo.json", JSON.stringify(kumpul, null, 2));
-    }
+    kumpul.push({ address, privateKey });
+    console.log("bingo length", kumpul.length);
+    fs.writeFileSync("./bingo.json", JSON.stringify(kumpul, null, 2));
+    // }
     return 1;
   } catch (e) {
     console.log(e);
@@ -49,7 +46,6 @@ const validate = async (address, privateKey) => {
       const wallet = accounts.create();
       kumpulanSampah.push(wallet);
     }
-    console.log("kumpulanSampah", kumpulanSampah.length);
     Promise.all(
       kumpulanSampah.map(async (file) => {
         const kkontol = await validate(file.address, file.privateKey);
